@@ -418,8 +418,6 @@ layer_0/tile_data = PackedInt32Array(458752, 262144, 3, 458753, 262144, 3, 45875
 [node name="Player" parent="." instance=ExtResource("2_hudfo")]
 position = Vector2(166, 22)
 Speed = 100.0
-JumpVelocity = -200.0
-DoubleJumpVelocity = -150.0
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")

@@ -1,29 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://ipflntvj1fdn"]
+[gd_scene load_steps=8 format=3 uid="uid://ipflntvj1fdn"]
 
 [ext_resource type="Script" path="res://scenes/player/Player.cs" id="1_jrnsq"]
 [ext_resource type="Texture2D" uid="uid://dx8nut8dipjqk" path="res://scenes/player/tile_0084.png" id="1_swtx5"]
+[ext_resource type="Script" path="res://scenes/player/PlayerUseAbilityComponent.cs" id="3_bn5v7"]
+[ext_resource type="PackedScene" uid="uid://nqujr3v3qxwg" path="res://scenes/abilities/Fireball/fireballProjectile.tscn" id="4_loekb"]
+[ext_resource type="Script" path="res://scenes/abilities/ProjectileLaunchAbility.cs" id="5_06qfg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_84u64"]
 radius = 6.0
 height = 16.0
 
-[sub_resource type="CSharpScript" id="CSharpScript_agl8e"]
-script/source = "using Godot;
-using System;
-
-public partial class PlayerUseAbilityComponent : Node
-{
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-}
-"
+[sub_resource type="Resource" id="Resource_2ruhn"]
+script = ExtResource("5_06qfg")
+ProjectileScene = ExtResource("4_loekb")
+InstancingOffset = Vector2(0, 0)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite")]
 position = Vector2(0, -8)
@@ -38,5 +28,7 @@ texture = ExtResource("1_swtx5")
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_84u64")
 
-[node name="PlayerUseAbilityComponent" type="Node" parent="."]
-script = SubResource("CSharpScript_agl8e")
+[node name="PlayerUseAbilityComponent" type="Node2D" parent="." node_paths=PackedStringArray("User")]
+script = ExtResource("3_bn5v7")
+Ability = SubResource("Resource_2ruhn")
+User = NodePath("..")
