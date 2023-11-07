@@ -9,8 +9,9 @@ public partial class ProjectileLaunchAbility : Ability
     {
         Projectile instance = (Projectile)ProjectileScene.Instantiate();
         user.GetParent().AddChild(instance);
+        var userPlayer = (Player)user;
 
-        var facingSign = Mathf.Sign(user.GlobalPosition.X);
+        var facingSign = Mathf.Sign(userPlayer.PDirection.X);
         var finalOffset = new Vector2(
             InstancingOffset.X * facingSign,
             InstancingOffset.Y
@@ -18,7 +19,7 @@ public partial class ProjectileLaunchAbility : Ability
 
         var instancePosition = user.GlobalPosition + finalOffset;
         instance.GlobalPosition = instancePosition;
-        instance.Launch(user, user.GlobalTransform.X);
+        instance.Launch(user, userPlayer.PDirection);
         return true;
     }
 }

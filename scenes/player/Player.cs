@@ -3,17 +3,15 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
-	[Export]
-	public float Speed = 150f;
-	[Export]
-	public float JumpVelocity = -200f;
-	[Export]
-	public float DoubleJumpVelocity = -150f;
-
-	[Export]
-	public Sprite2D Sprite = null;
+	[Export] public float Speed = 150f;
+	[Export] public float JumpVelocity = -200f;
+	[Export] public float DoubleJumpVelocity = -150f;
+	[Export] public Sprite2D Sprite = null;
 	public Boolean HasDoubleJumped = false;
+	// Set the player direction
 	public Vector2 direction;
+	// Set the Projectile direction
+	public Vector2 PDirection = new Vector2(1, 0);
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
@@ -70,10 +68,12 @@ public partial class Player : CharacterBody2D
 	{
 		if(direction.X > 0)
 		{
+			PDirection.X = 1;
 			Sprite.FlipH = false;
 		}
 		else if(direction.X < 0)
 		{
+			PDirection.X = -1;
 			Sprite.FlipH = true;
 		}
 	}
